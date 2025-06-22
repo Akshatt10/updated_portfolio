@@ -184,9 +184,6 @@ const Experience = () => {
               >
                 <h4 className="text-lg font-semibold text-white mb-3">Currently Pursuing</h4>
                 <div className="space-y-2">
-                  <p className="text-gray-300">• AWS Cloud Practitioner Certification</p>
-                  <p className="text-gray-300">• Machine Learning Specialization (Stanford)</p>
-                  <p className="text-gray-300">• Advanced React Development Course</p>
                 </div>
               </motion.div>
             </div>
