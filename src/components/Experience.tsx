@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Building, Award, Calendar, CheckCircle } from 'lucide-react';
+import GitHubCalendar from 'react-github-calendar'; // ✅ New import
 
 const Experience = () => {
   const [ref, inView] = useInView({
@@ -22,7 +23,7 @@ const Experience = () => {
         'Collaborated closely with DevOps and frontend teams to ensure CI/CD pipeline integration, code quality, and seamless deployment to staging and production environments.',
         'Contributed to the development of an internal Learning Management System (LMS) using Django.'
       ],
-      technologies: ['Node.js', 'Koa.js', 'TypeScript', 'FastAPI', 'Neo4j','RESTAPI','GraphQL', 'Azure', 'Microservices']
+      technologies: ['Node.js', 'Koa.js', 'TypeScript', 'FastAPI', 'Neo4j', 'RESTAPI', 'GraphQL', 'Azure', 'Microservices']
     },
     {
       title: 'Data Science Intern',
@@ -189,6 +190,23 @@ const Experience = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* GitHub Contribution Graph */}
+        <div className="mt-20 text-center">
+          <h3 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-green-400 to-lime-400 bg-clip-text text-transparent">
+            Proof of contributions
+          </h3>
+          <div className="flex justify-center">
+            <GitHubCalendar
+              username="Akshatt10"
+              blockSize={15}
+              blockMargin={5}
+              color="#22c55e"
+              fontSize={16}
+            />
+          </div>
+        </div>
+
       </div>
     </section>
   );
