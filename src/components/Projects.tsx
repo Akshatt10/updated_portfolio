@@ -31,16 +31,6 @@ const Projects = () => {
       code: 'https://github.com/Akshatt10/RealTime-Chat-App',
     },
     {
-      title: 'To-Do Task App',
-      description: 'This is a To-Do app making you write all your days To-Do and help you cut down on what is done.',
-      icon: CheckSquare,
-      tech: ['React', 'JavaScript', 'HTML', 'CSS'],
-      gradient: 'from-green-500 to-teal-500',
-      features: ['Task Management', 'Progress Tracking', 'Local Storage', 'Clean Interface'],
-      link: 'https://to-do-app-git-main-akshat-tyagis-projects.vercel.app/',
-      code: 'https://github.com/Akshatt10/To-Do-App',
-    },
-    {
       title: 'Gemini Clone',
       description: 'An application showing my frontend and API skills where I cloned Google GEMINI with ReactJs into a responsive website and deployed on Netlify.',
       icon: Sparkles,
