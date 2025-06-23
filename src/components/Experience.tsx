@@ -64,7 +64,22 @@ const Experience = () => {
   ];
 
   return (
+    
     <section id="experience" className="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+              {/* GitHub Contribution Graph */}
+        <div className="mt-20 mb-20 text-center">
+          <h3 className="text-3xl font-bold text-whitetext-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+            Proof of contributions
+          </h3>
+          <div className="flex justify-center">
+            <GitHubCalendar
+              username="Akshatt10"
+              blockSize={20}
+              blockMargin={5}
+              fontSize={16}
+            />
+          </div>
+        </div>
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
@@ -191,21 +206,7 @@ const Experience = () => {
           </motion.div>
         </div>
 
-        {/* GitHub Contribution Graph */}
-        <div className="mt-20 text-center">
-          <h3 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-green-400 to-lime-400 bg-clip-text text-transparent">
-            Proof of contributions
-          </h3>
-          <div className="flex justify-center">
-            <GitHubCalendar
-              username="Akshatt10"
-              blockSize={15}
-              blockMargin={5}
-              color="#22c55e"
-              fontSize={16}
-            />
-          </div>
-        </div>
+
 
       </div>
     </section>
