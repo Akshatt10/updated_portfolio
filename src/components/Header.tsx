@@ -45,7 +45,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent"
           >
-            Akshat Tyagi
+            Algo Aficionado
           </motion.div>
 
           {/* Desktop Navigation */}

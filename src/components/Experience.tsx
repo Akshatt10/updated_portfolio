@@ -50,7 +50,7 @@ const Experience = () => {
       badge: '🎯'
     },
     {
-      name: 'Neo4j Fundamentals',
+      name: 'Cypher Fundamentals',
       issuer: 'Neo4j',
       date: '2025',
       badge: '☁️'
@@ -198,9 +198,7 @@ const Experience = () => {
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="mt-8 p-6 bg-gradient-to-r from-blue-600/10 to-violet-600/10 border border-blue-400/20 rounded-xl"
               >
-                <h4 className="text-lg font-semibold text-white mb-3">Currently Pursuing</h4>
-                <div className="space-y-2">
-                </div>
+              
               </motion.div>
             </div>
           </motion.div>
