@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Building, Award, Calendar, CheckCircle } from 'lucide-react';
-import GitHubCalendar from 'react-github-calendar'; // ✅ New import
+import GitHubCalendar from 'react-github-calendar';
 
 const Experience = () => {
   const [ref, inView] = useInView({
@@ -12,9 +12,20 @@ const Experience = () => {
 
   const experiences = [
     {
+      title: 'Software Developer',
+      company: 'AFI DigitalServices LLP',
+      duration: 'June 2025 - Present',
+      achievements: [
+        'Transitioned to a full-time role after successful internship with continued contributions to large-scale backend systems.',
+        'Leading new modules in microservices infrastructure and API integrations for client delivery.',
+        'Working with stakeholders on feature planning, technical design, and scalable implementation.'
+      ],
+      technologies: ['Node.js', 'TypeScript', 'Azure', 'Microservices', 'GraphQL', 'Neo4j']
+    },
+    {
       title: 'Software Developer Intern',
       company: 'AFI DigitalServices LLP',
-      duration: 'Dec 2024 - Present',
+      duration: 'Dec 2024 - May 2025',
       achievements: [
         'Redesigned and led the backend architecture of a production-level enterprise application, creating scalable microservices with well-structured ERDs and normalized data models.',
         'Engineered high-performance REST APIs using FastAPI, Node.js, and TypeScript, integrating multiple external services to streamline user workflows and boost feature delivery speed.',
@@ -64,22 +75,7 @@ const Experience = () => {
   ];
 
   return (
-    
     <section id="experience" className="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
-              {/* GitHub Contribution Graph */}
-        <div className="mt-20 mb-20 text-center">
-          <h3 className="text-3xl font-bold text-whitetext-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
-            Proof of contributions
-          </h3>
-          <div className="flex justify-center">
-            <GitHubCalendar
-              username="Akshatt10"
-              blockSize={20}
-              blockMargin={5}
-              fontSize={16}
-            />
-          </div>
-        </div>
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
@@ -95,7 +91,6 @@ const Experience = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Experience Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -154,7 +149,6 @@ const Experience = () => {
             ))}
           </motion.div>
 
-          {/* Certifications Section */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -191,21 +185,30 @@ const Experience = () => {
                   </motion.div>
                 ))}
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="mt-8 p-6 bg-gradient-to-r from-blue-600/10 to-violet-600/10 border border-blue-400/20 rounded-xl"
-              >
-              
-              </motion.div>
             </div>
           </motion.div>
         </div>
 
-
-
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mt-20 mb-10 text-center"
+        >
+          <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+            Proof of Contributions
+          </h3>
+          <div className="flex justify-center">
+            <GitHubCalendar
+              username="Akshatt10"
+              blockSize={18}
+              blockMargin={5}
+              fontSize={16}
+              colorScheme="dark"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
