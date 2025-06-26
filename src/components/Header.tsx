@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,13 +17,30 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  const scrollToHash = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
     }
   };
+
+  const handleNavClick = (target: string) => {
+  if (target === 'projects') {
+    navigate('/projects');
+  } else if (target === 'contact') {
+    navigate('/contact');
+  } else if (target === 'home') {
+    navigate('/');
+  } else {
+    if (location.pathname !== '/') {
+      navigate(`/#${target}`);
+    } else {
+      scrollToHash(target);
+    }
+  }
+  setIsMobileMenuOpen(false);
+};
+
 
   const navItems = [
     { name: 'Home', id: 'home' },
@@ -43,7 +63,8 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent"
+            className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent cursor-pointer"
+            onClick={() => handleNavClick('home')}
           >
             Algo Aficionado
           </motion.div>
@@ -53,7 +74,7 @@ const Header = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item.id)}
                 className="text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium"
               >
                 {item.name}
@@ -80,7 +101,7 @@ const Header = () => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item.id)}
                 className="block w-full text-left px-6 py-3 text-gray-300 hover:text-blue-400 hover:bg-gray-700/50 transition-all duration-200"
               >
                 {item.name}

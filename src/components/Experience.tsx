@@ -76,7 +76,27 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-10"
+      >
+        <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+          Proof of Contributions
+        </h3>
+      </motion.div>
+          <div className="flex justify-center">
+            <GitHubCalendar
+              username="Akshatt10"
+              blockSize={20}
+              blockMargin={5}
+              fontSize={16}
+              colorScheme="dark"
+            />
+          </div>
       <div className="container mx-auto px-6">
+        <div className="mt-16" />
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -196,18 +216,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="mt-20 mb-10 text-center"
         >
-          <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
-            Proof of Contributions
-          </h3>
-          <div className="flex justify-center">
-            <GitHubCalendar
-              username="Akshatt10"
-              blockSize={18}
-              blockMargin={5}
-              fontSize={16}
-              colorScheme="dark"
-            />
-          </div>
+          
         </motion.div>
       </div>
     </section>
