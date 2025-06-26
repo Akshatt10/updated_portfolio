@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Download, Sparkles, Zap, Heart } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, X, Download, Sparkles, Zap, Heart } from 'lucide-react';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -47,9 +47,9 @@ const Contact = () => {
       description: 'Professional network'
     },
     {
-      icon: Twitter,
-      name: 'Twitter',
-      url: 'https://twitter.com',
+      icon: X,
+      name: 'X (Twitter)',
+      url: 'https://x.com/Akshat01T',
       color: 'hover:text-sky-400',
       description: 'Follow my journey'
     },
