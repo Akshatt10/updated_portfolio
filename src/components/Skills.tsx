@@ -1,177 +1,168 @@
-import React from 'react';
-import { Code, Database, Cloud, Settings, Zap, Globe } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Code, Database, Cloud, Settings, Cpu } from 'lucide-react';
 
-const Skills = () => {
+// --- TYPE DEFINITIONS for TypeScript ---
+// This makes our code type-safe and prevents the errors you were seeing.
+
+// Defines the shape of each line object in the terminal output.
+type Line = 
+  | { type: 'command'; text: string }
+  | { type: 'output'; text: string; color?: string }
+  | { type: 'skills'; skills: string[] }
+  | { type: 'prompt' };
+
+// This is the main component, now written in TypeScript (.tsx)
+const SkillsTerminal = (): JSX.Element => {
+  // --- DATA ---
+  // The data structure remains the same.
   const skillCategories = [
     {
       icon: Code,
       title: 'Languages',
-      description: 'Core programming languages I use daily',
-      skills: [
-        { name: 'Python', color: 'from-yellow-400 to-yellow-600', expertise: 'expert' },
-        { name: 'JavaScript', color: 'from-blue-400 to-blue-600', expertise: 'expert' },
-        { name: 'TypeScript', color: 'from-blue-500 to-blue-700', expertise: 'advanced' },
-        { name: 'C++', color: 'from-purple-400 to-purple-600', expertise: 'advanced' },
-        { name: 'SQL', color: 'from-green-400 to-green-600', expertise: 'expert' },
-        { name: 'Go', color: 'from-cyan-400 to-cyan-600', expertise: 'intermediate' },
-      ]
+      skills: ['Python', 'JavaScript', 'TypeScript', 'C++', 'SQL', 'Go'],
     },
     {
       icon: Settings,
       title: 'Frameworks & Libraries',
-      description: 'Modern frameworks for efficient development',
-      skills: [
-        { name: 'FastAPI', color: 'from-teal-400 to-teal-600', expertise: 'expert' },
-        { name: 'React', color: 'from-cyan-400 to-cyan-600', expertise: 'advanced' },
-        { name: 'Node.js', color: 'from-lime-400 to-lime-600', expertise: 'advanced' },
-        { name: 'Koa.js', color: 'from-emerald-400 to-emerald-600', expertise: 'advanced' },
-        { name: 'Prisma', color: 'from-indigo-400 to-indigo-600', expertise: 'advanced' },
-      ]
+      skills: ['FastAPI', 'React', 'Node.js', 'Koa.js', 'Prisma'],
     },
     {
       icon: Database,
       title: 'Databases',
-      description: 'Data storage and management solutions',
-      skills: [
-        { name: 'PostgreSQL', color: 'from-blue-500 to-blue-700', expertise: 'expert' },
-        { name: 'MongoDB', color: 'from-emerald-400 to-emerald-600', expertise: 'advanced' },
-        { name: 'Neo4j', color: 'from-gray-400 to-gray-600', expertise: 'advanced' },
-        { name: 'Redis', color: 'from-red-400 to-red-600', expertise: 'advanced' },
-        { name: 'CosmosDB', color: 'from-violet-400 to-violet-600', expertise: 'intermediate' },
-      ]
+      skills: ['PostgreSQL', 'MongoDB', 'Neo4j', 'Redis', 'CosmosDB'],
     },
     {
       icon: Cloud,
       title: 'Cloud & DevOps',
-      description: 'Deployment and infrastructure management',
-      skills: [
-        { name: 'Azure', color: 'from-blue-400 to-blue-600', expertise: 'advanced' },
-        { name: 'Docker', color: 'from-sky-400 to-sky-600', expertise: 'advanced' },
-        { name: 'Git', color: 'from-orange-400 to-orange-600', expertise: 'expert' },
-        { name: 'CI/CD', color: 'from-indigo-400 to-indigo-600', expertise: 'advanced' },
-        { name: 'Linux', color: 'from-yellow-500 to-yellow-700', expertise: 'advanced' },
-      ]
+      skills: ['Azure', 'Docker', 'Git', 'CI/CD', 'Linux'],
     }
   ];
 
-  const expertiseColors = {
-    expert: 'bg-green-500/20 text-green-400 border-green-500/30',
-    advanced: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-    intermediate: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
-  };
+  const additionalTech = [
+    'WebSockets', 'Agentic AI', 'Microservices', 'REST APIs', 'GraphQL',
+    'JWT', 'OAuth', 'Machine Learning', 'TensorFlow', 'Pandas',
+    'NumPy', 'Nginx', 'Web3', 'Blockchain', 'Cypher Query Language'
+  ];
+  
+  // --- STATE FOR ANIMATION ---
+  // We explicitly tell useState that it will hold an array of our 'Line' type.
+  const [lines, setLines] = useState<Line[]>([]);
+  // We type useRef to expect an HTMLDivElement for proper DOM access.
+  const terminalRef = useRef<HTMLDivElement>(null);
 
+  // --- LOGIC TO GENERATE AND ANIMATE LINES ---
+  useEffect(() => {
+    // We explicitly type the 'generatedLines' array.
+    const generatedLines: Line[] = [];
+    generatedLines.push({ type: 'command', text: './list-skills.sh' });
+    generatedLines.push({ type: 'output', text: 'Initializing skill assessment protocol...' });
+    generatedLines.push({ type: 'output', text: ' ' });
+
+    skillCategories.forEach(category => {
+      generatedLines.push({ type: 'output', text: `// ${category.title}`, color: 'text-purple-400' });
+      generatedLines.push({ type: 'skills', skills: category.skills });
+      generatedLines.push({ type: 'output', text: ' ' });
+    });
+    
+    generatedLines.push({ type: 'output', text: `// Additional Technologies`, color: 'text-purple-400' });
+    generatedLines.push({ type: 'skills', skills: additionalTech });
+    generatedLines.push({ type: 'output', text: ' ' });
+
+    generatedLines.push({ type: 'output', text: 'Skill matrix loaded successfully.', color: 'text-green-400' });
+    generatedLines.push({ type: 'prompt' });
+
+    // This effect handles the line-by-line animation.
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < generatedLines.length) {
+        // By using slice, we create a new array for the state on each update.
+        // This replaces the previous state instead of appending to it, which prevents duplication.
+        setLines(generatedLines.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 250); // Adjust delay between lines here
+
+    // The cleanup function clears the interval when the component unmounts.
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  // --- AUTO-SCROLLING LOGIC ---
+  useEffect(() => {
+    // The ref is now correctly typed, so TypeScript knows about 'scrollTop' and 'scrollHeight'.
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [lines]);
+
+  // --- RENDER ---
   return (
-    <section id="skills" className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/5 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-violet-500/5 rounded-full blur-xl"></div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <Zap className="w-8 h-8 text-blue-400" />
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
-              Technical Expertise
-            </h2>
-          </div>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-violet-400 mx-auto mb-6"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            A comprehensive toolkit of modern technologies and frameworks I leverage to build scalable, efficient solutions
-          </p>
+    <section id="skills" className="py-24 bg-gray-900 font-sans">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+           <div className="inline-flex items-center gap-3 mb-4">
+             <Cpu className="w-8 h-8 text-teal-300" />
+             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-teal-300 to-purple-400 bg-clip-text text-transparent">
+               My Tech Stack
+             </h2>
+           </div>
+           <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+             A curated list of technologies I work with, presented in a classic terminal interface.
+           </p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-20">
-          {skillCategories.map((category, index) => (
-            <div
-              key={category.title}
-              className="group bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500"
-            >
-              {/* Category Header */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-gradient-to-br from-blue-500/20 to-violet-500/20 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                  <category.icon className="w-6 h-6 text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">{category.title}</h3>
-                  <p className="text-gray-400 text-sm">{category.description}</p>
-                </div>
-              </div>
+        {/* Terminal Window */}
+        <div className="max-w-4xl mx-auto bg-black bg-opacity-50 backdrop-blur-sm rounded-xl shadow-2xl shadow-teal-500/10 border border-gray-700 overflow-hidden">
+          {/* Terminal Header */}
+          <div className="bg-gray-800/80 p-3 flex items-center gap-2 border-b border-gray-700">
+            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <p className="text-xs text-gray-400 ml-2 font-mono">/bin/bash</p>
+          </div>
 
-              {/* Skills */}
-              <div className="grid grid-cols-2 gap-3">
-                {category.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group/skill relative bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/30 hover:border-gray-500/50 rounded-xl p-4 transition-all duration-300"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-white font-medium text-sm">{skill.name}</span>
-                        <span className={`px-2 py-1 rounded-md text-xs font-medium border ${expertiseColors[skill.expertise]}`}>
-                          {skill.expertise}
-                        </span>
-                      </div>
-                      
-                      {/* Skill indicator bar */}
-                      <div className="w-full bg-gray-700/50 rounded-full h-1.5 overflow-hidden">
-                        <div className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-500 group-hover/skill:animate-pulse`}>
-                          <div className="h-full bg-white/20 animate-shimmer"></div>
-                        </div>
-                      </div>
+          {/* Terminal Body */}
+          <div ref={terminalRef} className="p-4 md:p-6 h-96 overflow-y-auto font-mono text-sm text-gray-300">
+            {lines.map((line, index) => {
+              // The switch statement now correctly infers the properties available on 'line'.
+              switch (line.type) {
+                case 'command':
+                  return (
+                    <div key={index} className="flex items-center gap-2">
+                      <span className="text-teal-400">user@portfolio:~$</span>
+                      <span className="flex-1">{line.text}</span>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Additional Technologies */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-3 mb-8">
-            <Globe className="w-6 h-6 text-violet-400" />
-            <h3 className="text-2xl font-bold text-white">Additional Technologies</h3>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {[
-              'WebSockets', 'Agentic AI', 'Microservices', 'REST APIs', 'GraphQL',
-              'JWT', 'OAuth', 'Machine Learning', 'TensorFlow', 'Pandas',
-              'NumPy', 'Nginx', 'Web3', 'Blockchain', 'Cypher Query Language'
-            ].map((tech) => (
-              <div
-                key={tech}
-                className="group px-4 py-2 bg-gradient-to-r from-gray-800/60 to-gray-700/60 border border-gray-600/40 hover:border-blue-400/60 rounded-full text-gray-300 hover:text-blue-400 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
-              >
-                <span className="relative z-10">{tech}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 to-violet-600/0 group-hover:from-blue-600/10 group-hover:to-violet-600/10 rounded-full transition-all duration-300"></div>
-              </div>
-            ))}
+                  );
+                case 'output':
+                  return <p key={index} className={line.color || ''}>{line.text}</p>;
+                case 'skills':
+                  return (
+                    <div key={index} className="flex flex-wrap gap-2 py-1">
+                      {line.skills.map((skill: string) => ( // Explicitly typing 'skill' as a string
+                        <span key={skill} className="px-3 py-1 bg-gray-700/50 border border-gray-600/80 text-teal-300 rounded-md hover:bg-teal-500/20 hover:border-teal-400/70 transition-all duration-300 cursor-default">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  );
+                case 'prompt':
+                  return (
+                     <div key={index} className="flex items-center gap-2">
+                       <span className="text-teal-400">user@portfolio:~$</span>
+                       <span className="w-2 h-4 bg-green-400 animate-pulse"></span>
+                     </div>
+                  );
+                default:
+                  return null;
+              }
+            })}
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-
-        .animate-shimmer {
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-          animation: shimmer 2s infinite;
-        }
-      `}</style>
     </section>
   );
 };
 
-export default Skills;
+export default SkillsTerminal;

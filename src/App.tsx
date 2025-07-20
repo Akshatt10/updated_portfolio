@@ -6,12 +6,11 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 import ProjectsPage from './pages/projects'; // ✅ full page
 import ContactPage from './pages/contact'; // ✅ full page
-import ScrollToTop from './components/ScrollToTop'; // ✅ scroll to top component
+import ScrollToTop from './components/scrolltotop'; // ✅ scroll to top component
 function App() {
   return (
     <Router>
