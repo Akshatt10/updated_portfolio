@@ -70,25 +70,7 @@ const Hero = () => {
 
           {/* Action buttons with the new color scheme */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fadeIn animation-delay-800">
-            <button
-              onClick={scrollToContact}
-              className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-full font-medium flex items-center gap-3 transition-all duration-300 hover:scale-105 border border-gray-700"
-            >
-              <Mail size={20} />
-              Let's Connect
-            </button>
-
-            <a href=""></a>
-
             <div className="flex gap-4">
-              <button
-                onClick={scrollToProjects}
-                className="border border-gray-600/50 text-gray-300 hover:bg-gray-300/10 px-6 py-3 rounded-full font-medium flex items-center gap-2 transition-all duration-300"
-              >
-                <Code size={18} />
-                Projects
-              </button>
-
               <a
                 href="https://drive.google.com/file/d/1m5vmjzjrpTf6vjzFHDuG3gG3q4OeUMsB/view?usp=drive_link"
                 target="_blank"
@@ -126,7 +108,6 @@ const Hero = () => {
       {/* Scroll indicator with the new theme */}
       <div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 animate-fadeIn animation-delay-1200"
-        onClick={scrollToProjects}
       >
         <div className="flex flex-col items-center space-y-2 text-gray-600 hover:text-gray-300 transition-colors">
           <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center">
