@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -10,7 +11,7 @@ const Footer = () => {
   const quickLinks = [
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
+    { name: 'Projects', href: '/projects' }, // changed from '#projects' to '/projects'
     { name: 'Experience', href: '#experience' },
   ];
 
@@ -40,15 +41,25 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Explore</h3>
             <div className="space-y-2">
-              {quickLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="block text-gray-500 hover:text-white transition-colors duration-200"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {quickLinks.map((link) =>
+                link.name === 'Projects' ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="block text-gray-500 hover:text-white transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="block text-gray-500 hover:text-white transition-colors duration-200"
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Code, Database, Cloud, Settings, Cpu } from 'lucide-react';
+import { Code, Database, Cloud, Settings,Network, Brain, Cpu } from 'lucide-react';
 
 // --- TYPE DEFINITIONS for TypeScript ---
 // This makes our code type-safe and prevents the errors you were seeing.
@@ -15,34 +15,61 @@ type Line =
 const SkillsTerminal = (): JSX.Element => {
   // --- DATA ---
   // The data structure remains the same.
-  const skillCategories = [
-    {
-      icon: Code,
-      title: 'Languages',
-      skills: ['Python', 'JavaScript', 'TypeScript', 'C++', 'SQL', 'Go'],
-    },
-    {
-      icon: Settings,
-      title: 'Frameworks & Libraries',
-      skills: ['FastAPI', 'React', 'Node.js', 'Koa.js', 'Prisma'],
-    },
-    {
-      icon: Database,
-      title: 'Databases',
-      skills: ['PostgreSQL', 'MongoDB', 'Neo4j', 'Redis', 'CosmosDB'],
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud & DevOps',
-      skills: ['Azure', 'Docker', 'Git', 'CI/CD', 'Linux'],
-    }
-  ];
+const skillCategories = [
+  {
+    icon: Code,
+    title: 'Languages',
+    skills: ['Python', 'JavaScript', 'TypeScript', 'C++', 'SQL', 'Go'],
+  },
+  {
+    icon: Settings,
+    title: 'Frameworks & Libraries',
+    skills: [
+      'FastAPI', 'React', 'Node.js', 'Koa.js', 'Prisma',
+      'Express.js', 'Next.js', 'Tailwind CSS'
+    ],
+  },
+  {
+    icon: Database,
+    title: 'Databases',
+    skills: [
+      'PostgreSQL', 'MongoDB', 'Neo4j', 'Redis', 'CosmosDB',
+      'MySQL', 'SQLite'
+    ],
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud & DevOps',
+    skills: [
+      'AWS', 'Azure', 'Docker','Git',
+      'CI/CD', 'Linux', 'Nginx', 'Cloudflare'
+    ],
+  },
+  {
+    icon: Brain,
+    title: 'AI & Data Science',
+    skills: [
+      'Machine Learning', 'Deep Learning','Data Visualization', 
+      'LLMs', 'Generative AI', 'RAG',
+      'Agentic AI' ,'LangGraph', 'LangChain'
+    ],
+  },
+  {
+    icon: Network,
+    title: 'APIs & Architecture',
+    skills: [
+      'REST APIs', 'GraphQL', 'WebSockets', 'Microservices',
+      'JWT', 'OAuth2.0'
+    ]},
+  {
+    icon: Cpu,
+    title: 'System Design & Diagramming',
+    skills: [
+      'Excalidraw', 'Eraser.io', 'Miro', 'Lucidchart','Draw.io'
+    ]
+  }
+];
 
-  const additionalTech = [
-    'WebSockets', 'Agentic AI', 'Microservices', 'REST APIs', 'GraphQL',
-    'JWT', 'OAuth', 'Machine Learning', 'TensorFlow', 'Pandas',
-    'NumPy', 'Nginx', 'Web3', 'Blockchain', 'Cypher Query Language'
-  ];
   
   // --- STATE FOR ANIMATION ---
   // We explicitly tell useState that it will hold an array of our 'Line' type.
@@ -63,10 +90,6 @@ const SkillsTerminal = (): JSX.Element => {
       generatedLines.push({ type: 'skills', skills: category.skills });
       generatedLines.push({ type: 'output', text: ' ' });
     });
-    
-    generatedLines.push({ type: 'output', text: `// Additional Technologies`, color: 'text-purple-400' });
-    generatedLines.push({ type: 'skills', skills: additionalTech });
-    generatedLines.push({ type: 'output', text: ' ' });
 
     generatedLines.push({ type: 'output', text: 'Skill matrix loaded successfully.', color: 'text-green-400' });
     generatedLines.push({ type: 'prompt' });
