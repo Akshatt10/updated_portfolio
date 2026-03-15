@@ -58,7 +58,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fadeIn animation-delay-800">
             <div className="flex gap-4">
               <a
-                href="https://drive.google.com/file/d/1m5vmjzjrpTf6vjzFHDuG3gG3q4OeUMsB/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1dDKWIySFNGRKasKH7N5OVHqsCjo7p4v4/view?usp=share_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border border-gray-700/50 text-gray-400 hover:bg-gray-400/10 px-6 py-3 rounded-full font-medium flex items-center gap-2 transition-all duration-300"
